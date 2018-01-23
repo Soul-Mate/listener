@@ -1,0 +1,19 @@
+# Common make definitions, customized for each platform
+
+# Definitions required in all program directories to compile and link
+# C programs using gcc.
+CC=gcc
+COMPILE.c=$(CC) $(CFLAGS) $(CPPFLAGS) -c
+LINK.c=$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS)
+LDFLAGS=
+LDDIR=-L$(ROOT)/libs
+LDLIBS=$(LDDIR) -lpthread -lhiredis -lmysqlclient -lrt $(EXTRALIBS)
+CFLAGS= -I$(ROOT)/inc -I/usr/local/include/hiredis -I/usr/local/include/google -L/usr/local/lib -Wall -DLINUX -DDEBUG -D_GNU_SOURCE $(EXTRA)
+RANLIB=echo
+AR=ar
+AWK=awk
+LIBS=$(ROOT)/libs/libs.a
+
+# Common temp files to delete from each directory.
+TEMPFILES=core core.* *.o temp.* *.out
+

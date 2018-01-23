@@ -1,0 +1,45 @@
+SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
+
+SET(LIBRARY_OUTPUT_PATH  ${PROJECT_BINARY_DIR}/libs)
+
+SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+
+FIND_PACKAGE(MySQL)
+
+IF(MYSQL_FOUND)
+    INCLUDE_DIRECTORIES(${MYSQL_INCLUDE_DIR})
+ENDIF(MYSQL_FOUND)
+
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/inc)
+INCLUDE_DIRECTORIES(/usr/local/include/hiredis)
+INCLUDE_DIRECTORIES(/usr/include/hiredis)
+INCLUDE_DIRECTORIES(/usr/include/mysql)
+
+SET(LIBS ${PROJECT_SOURCE_DIR}/libs)
+
+SET(LIBCJSON_SRC ${LIBS}/cJSON.c)
+ADD_LIBRARY(cjson SHARED ${LIBCJSON_SRC})
+
+SET(LIBHIMYSQL_SRC ${LIBS}/himysql.c)
+ADD_LIBRARY(himysql SHARED ${LIBHIMYSQL_SRC})
+
+SET(LIBHASHMAP_SRC ${LIBS}/hashmap.c)
+ADD_LIBRARY(hashmap SHARED ${LIBHASHMAP_SRC})
+
+
+SET(LISTENER_SRC ${LIBS}/lis.c ${LIBS}/lis_cache.c
+        ${LIBS}/lis_daemon.c ${LIBS}/lis_exit.c ${LIBS}/lis_interval.c
+        ${LIBS}/lis_league.c ${LIBS}/lis_log.c ${LIBS}/lis_market.c ${LIBS}/lis_match.c
+        ${LIBS}/lis_notify.c ${LIBS}/lis_read.c ${LIBS}/lis_start.c)
+
+ADD_LIBRARY(listener SHARED ${LISTENER_SRC})
+
+ADD_EXECUTABLE(main main.c)
+
+TARGET_LINK_LIBRARIES(main listener)
+TARGET_LINK_LIBRARIES(main rt)
+TARGET_LINK_LIBRARIES(main cjson)
+TARGET_LINK_LIBRARIES(main himysql)
+TARGET_LINK_LIBRARIES(main hashmap)
+TARGET_LINK_LIBRARIES(main /usr/local/lib/libhiredis.so)
+TARGET_LINK_LIBRARIES(main ${MYSQL_LIBRARIES})

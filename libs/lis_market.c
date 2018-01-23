@@ -275,7 +275,7 @@ void save_marketfull(listener_t *lis)
     char *buf;
     ssize_t read_num;
     
-    read_num = read_file(MARKET_FULL_FILE,(void *)&buf);
+    read_num = read_file(MARKET_FULL_FILE,buf);
     
     if (read_num > 0) {
         save_market_to_db(lis->hm, (void *)buf); /* 保存到数据库 */

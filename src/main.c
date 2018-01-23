@@ -5,10 +5,10 @@
 int main(int argc, char *argv[])
 {
 	/* 非root用户 */
-	if (getuid() != 0) {
-		printf("Error: Permission denied\n");
-		exit(0);
-	}
+//	if (getuid() != 0) {
+//		printf("Error: Permission denied\n");
+//		exit(0);
+//	}
     
     strcpy(argv[0],"listenerd");
     

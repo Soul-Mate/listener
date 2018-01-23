@@ -377,7 +377,7 @@ void save_leaguesfull(listener_t *lis)
     char *buf;
     ssize_t read_num;
     
-    read_num = read_file(LEAGUE_FULL_FILE,buf);
+    read_num = read_file(LEAGUE_FULL_FILE,(void **)&buf);
     
     if (read_num > 0) {
         save_league_to_db(lis->hm, (void *)buf); /* 保存到数据库 */
@@ -395,10 +395,10 @@ void save_leaguesfull(listener_t *lis)
 void save_league(listener_t *lis)
 {
     char *buf;
-    
-    buf = get_file_value(LEAGUE_FILE);
-    printf("%s\n", buf);
-    if (buf != NULL) {
+    ssize_t read_num;
+
+    read_num = read_file(LEAGUE_FILE,(void **)&buf);
+    if (read_num > 0) {
         save_league_to_db(lis->hm, (void *)buf); /* 保存到数据库 */
         
         /* 保存到内存数据库 */

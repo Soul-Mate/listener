@@ -303,7 +303,7 @@ void save_matchfull(listener_t *lis)
     char *buf;
     ssize_t read_num;
     
-    read_num = read_file(MATCH_FULL_FILE,buf);
+    read_num = read_file(MATCH_FULL_FILE,(void **)&buf);
     
     if (read_num > 0) {
         save_match_to_db(lis->hm, (void *)buf); /* 保存到数据库 */

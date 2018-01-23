@@ -30,12 +30,12 @@ void start_listener(listener_t *lis)
     
     save_league(lis);
     
-    // save_leaguesfull(lis);
+    save_leaguesfull(lis);
     
-    // save_matchfull(lis);
-    
-    // save_marketfull(lis);
-    
+    save_matchfull(lis);
+
+    save_marketfull(lis);
+
     
     if (set_cache_interval(lis) != 0) {
 #ifdef DEBUG

@@ -267,7 +267,7 @@ void *parse_routine(void *arg)
             lis_log(LIS_LOG_RUN,"write file: %s to db\n",file);
 #endif
             /* 删除文件 */
-            if (unlinkat(listener->dir_fd,file,0) != 0) {
+/*            if (unlinkat(listener->dir_fd,file,0) != 0) {
 #ifdef DEBUG
                 printf("can't remove %s file. in %s, line: %d\n",
                        file,__FILE__,__LINE__);
@@ -287,7 +287,7 @@ void *parse_routine(void *arg)
                 lis_log(LIS_LOG_RUN,"remove %s file. in %s, line: %d\n",
                         file,__FILE__,__LINE__);
 #endif
-            }
+            }*/
         }
     }
     
@@ -338,7 +338,7 @@ void *parse_routine(void *arg)
             lis_log(LIS_LOG_RUN,"write file: %s to db\n",file);
 #endif
             /* 删除文件 */
-            if (unlinkat(listener->dir_fd,file,0) != 0) {
+/*            if (unlinkat(listener->dir_fd,file,0) != 0) {
 #ifdef DEBUG
                 printf("can't remove %s file. in %s, line: %d\n",
                        file,__FILE__,__LINE__);
@@ -358,7 +358,7 @@ void *parse_routine(void *arg)
                 lis_log(LIS_LOG_RUN,"remove %s file. in %s, line: %d\n",
                         file,__FILE__,__LINE__);
 #endif
-            }
+            }*/
         }
 	}
 	return NULL;

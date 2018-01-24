@@ -28,7 +28,7 @@ ssize_t read_file(const char * file, void **buf)
         return-1;
     }
     
-    (*buf) = malloc((size_t) (stat_buf.st_size));
+    (*buf) = (char *)malloc(stat_buf.st_size + 1);
     
     if ((*buf) == NULL) {
         return -1;

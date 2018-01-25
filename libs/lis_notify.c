@@ -228,8 +228,7 @@ void *parse_routine(void *arg)
 	
 	if (status != REG_NOMATCH) {
 #ifdef DEBUG
-		printf("match file: %s. in %s,line: %d\n",
-               file,__FILE__,__LINE__);
+        printf("match file: %s.\n", file);
 #endif
 
 #ifdef RUN
@@ -240,7 +239,7 @@ void *parse_routine(void *arg)
 		char *file_value;
 		
 		fd = openat(listener->dir_fd, file, O_RDONLY);
-		
+		printf("%d\n",fd);
 		if (fd < 0) {
 #ifdef DEBUG
             printf("Error: can't openat %s file. in %s,line: %d\n",
@@ -299,8 +298,7 @@ void *parse_routine(void *arg)
 	
 	if (status != REG_NOMATCH) {
 #ifdef DEBUG
-        printf("match file: %s. in %s,line: %d\n",
-               file,__FILE__,__LINE__);
+        printf("match file: %s.\n", file);
 #endif
 
 #ifdef RUN

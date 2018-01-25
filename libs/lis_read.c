@@ -62,6 +62,14 @@ ssize_t fread_file(int fd, void **buf)
     
     struct stat stat_buf;
     
+    if (fstat(fd, &stat_buf) == -1) {
+#ifdef DEBUG
+        printf("Error: fstat. in %s line: %d\n",
+               __FILE__, __LINE__);
+#endif
+        return-1;
+    }
+    
     (*buf) = (char *)malloc((size_t) (stat_buf.st_size + 1));
     
     if ((*buf) == NULL) {
@@ -86,5 +94,6 @@ ssize_t fread_file(int fd, void **buf)
             break;
         }
     }
+    close(fd);
     return read_num;
 }
